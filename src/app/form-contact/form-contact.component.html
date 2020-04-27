@@ -1,0 +1,42 @@
+<h3>Formulário Usuário - Telefone</h3>
+<form [formGroup]="form">
+
+  <!-- Telefone -->
+  <mat-form-field class="input-width">
+    <mat-label>Telefone</mat-label>
+    <input matInput placeholder="Ex. +55 (31) 99999-9999" prefix="+55" mask=" (00) 00000-0000" formControlName="phone">
+  </mat-form-field>
+  <button mat-flat-button color="primary" (click)="create()" class="btn-save"><mat-icon aria-hidden="false" aria-label="Create">add</mat-icon></button>
+</form>
+
+<div *ngIf="listData != null">
+  <!-- Inicio da Tabela -->
+  <table mat-table [dataSource]="listData">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef> Telefone </th>
+      <td mat-cell *matCellDef="let element"> {{element.phone | mask: '(00) 00000-0000'}} </td>
+    </ng-container>
+
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="warn" (click)="getDelete(element.id)"><mat-icon aria-hidden="false" aria-label="deletar">delete</mat-icon></button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+  <!-- Fim da Tabela -->
+</div>
+<div *ngIf="listData == null">
+  <h5>Sem Contatos : (</h5>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="fechar()">Fechar</button>
+</div>

@@ -1,0 +1,75 @@
+
+<!-- Conatiner -->
+<div class="container">
+
+  <div>
+    <mat-form-field class="inputSearch">
+      <mat-label><mat-icon aria-hidden="false" aria-label="Criar">search</mat-icon> Pesquisar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Danilo Sérvulo Bispo">
+    </mat-form-field>
+  </div>
+  <!-- Button Modal -->
+  <button mat-raised-button color="accent" class="btn-create" (click)="openForm($event)" >
+    <mat-icon aria-hidden="false" aria-label="Create">add</mat-icon>
+  </button>
+
+<!-- Inicio da Tabela -->
+  <table mat-table [dataSource]="listData" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- E-Mail Column -->
+    <ng-container matColumnDef="eMail">
+      <th mat-header-cell *matHeaderCellDef> E-Mail </th>
+      <td mat-cell *matCellDef="let element"> {{element.eMail}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nome </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Observation Column -->
+    <ng-container matColumnDef="observation">
+      <th mat-header-cell *matHeaderCellDef> Observação </th>
+      <td mat-cell *matCellDef="let element"> {{element.observation}} </td>
+    </ng-container>
+
+    <!-- Contact Column -->
+    <ng-container matColumnDef="contact">
+      <th mat-header-cell *matHeaderCellDef> Contato </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="Contato" (click)="openContact(element.id)">
+          <mat-icon>contact_phone</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Address Column -->
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef> Endereço </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="Endereço" (click)="openAddress(element.id)">
+          <mat-icon>home_work</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="primary" (click)="openForm(element)"><mat-icon aria-hidden="false" aria-label="editar">edit</mat-icon></button>
+        <span> </span>
+        <button mat-raised-button color="warn" (click)="getDelete(element)"><mat-icon aria-hidden="false" aria-label="deletar">delete</mat-icon></button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+<!-- Fim da Tabela -->
+</div>

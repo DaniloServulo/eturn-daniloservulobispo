@@ -1,0 +1,98 @@
+<h3>Formulário Usuário - Endereço</h3>
+<form [formGroup]="form">
+  <!-- CEP -->
+  <mat-form-field class="input-cep">
+    <mat-label>CEP</mat-label>
+    <input matInput placeholder="Ex. 99.000-000" mask="00.000-000" formControlName="cep">
+  </mat-form-field>
+  <button mat-raised-button color="primary" class="btn-cep" (click)="buscarCep()" ><mat-icon aria-hidden="false" aria-label="Criar">search</mat-icon></button>
+
+  <!-- Logradouro -->
+  <mat-form-field class="input-width">
+    <mat-label>Logradouro</mat-label>
+    <input matInput placeholder="Ex. Rua Exemplo" formControlName="logradouro">
+  </mat-form-field>
+
+  <!-- Localidade -->
+  <mat-form-field class="input-width">
+    <mat-label>Bairro</mat-label>
+    <input matInput placeholder="Ex. Bairro Angular" formControlName="bairro">
+  </mat-form-field>
+
+  <!-- Cidade -->
+  <mat-form-field class="input-width">
+    <mat-label>Estado</mat-label>
+    <input matInput placeholder="Ex. Firebase" formControlName="estado">
+  </mat-form-field>
+
+  <!-- UF -->
+  <mat-form-field class="input-width">
+    <mat-label>Estado</mat-label>
+    <input matInput placeholder="Ex. MG" formControlName="cidade">
+  </mat-form-field>
+
+  <!-- Número Local -->
+  <mat-form-field class="input-width">
+    <mat-label>Número</mat-label>
+    <input matInput placeholder="Ex. 584" formControlName="numeroLocal">
+  </mat-form-field>
+  <button mat-flat-button color="primary" (click)="create()" class="btn-save">Enviar</button>
+</form>
+<div *ngIf="listData != null" class="table">
+  <!-- Inicio da Tabela -->
+  <table mat-table [dataSource]="listData">
+
+    <!-- CEP Column -->
+    <ng-container matColumnDef="cep">
+      <th mat-header-cell *matHeaderCellDef> CEP </th>
+      <td mat-cell *matCellDef="let element"> {{element.cep | mask: '00.000-000'}} </td>
+    </ng-container>
+
+    <!-- Logradouro Column -->
+    <ng-container matColumnDef="logradouro">
+      <th mat-header-cell *matHeaderCellDef> Logradouro </th>
+      <td mat-cell *matCellDef="let element"> {{element.logradouro}} </td>
+    </ng-container>
+
+    <!-- Bairro Column -->
+    <ng-container matColumnDef="bairro">
+      <th mat-header-cell *matHeaderCellDef> Bairro </th>
+      <td mat-cell *matCellDef="let element"> {{element.bairro}} </td>
+    </ng-container>
+
+    <!-- Estado Column -->
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef> UF </th>
+      <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+    </ng-container>
+
+    <!-- Cidade Column -->
+    <ng-container matColumnDef="cidade">
+      <th mat-header-cell *matHeaderCellDef> Cidade </th>
+      <td mat-cell *matCellDef="let element"> {{element.cidade}} </td>
+    </ng-container>
+
+    <!-- NumeroLocal Column -->
+    <ng-container matColumnDef="numeroLocal">
+      <th mat-header-cell *matHeaderCellDef> Número </th>
+      <td mat-cell *matCellDef="let element"> {{element.numeroLocal}} </td>
+    </ng-container>
+
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="warn" (click)="getDelete(element.id)"><mat-icon aria-hidden="false" aria-label="deletar">delete</mat-icon></button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+  <!-- Fim da Tabela -->
+</div>
+<div *ngIf="listData == null">
+  <h5>Sem Endereço : (</h5>
+</div>

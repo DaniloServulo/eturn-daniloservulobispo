@@ -1,0 +1,86 @@
+<h3>Formulário Usuário</h3>
+<form [formGroup]="form">
+
+  <!-- Nome Completo -->
+  <mat-form-field class="input-width">
+    <mat-label>Nome Completo</mat-label>
+    <input matInput placeholder="Ex. Danilo Sérvulo Bispo" formControlName="name">
+  </mat-form-field>
+
+  <!-- E-Mail -->
+  <mat-form-field class="input-width">
+    <mat-label>E-Mail</mat-label>
+    <input matInput placeholder="Ex. exemplo@email.com" formControlName="eMail">
+  </mat-form-field>
+  <span>{{msgEmail}}</span>
+
+  <!-- Telefone -->
+  <mat-form-field class="input-width" *ngIf="id == null">
+    <mat-label>Telefone</mat-label>
+    <input matInput placeholder="Ex. +55 (31) 99999-9999" prefix="+55" mask=" (00) 00000-0000" formControlName="phone" (click)="validateEmail()">
+  </mat-form-field>
+  <span>{{msgPhone}}</span>
+
+  <!-- Observação -->
+  <mat-form-field class="input-width">
+    <mat-label>Observação</mat-label>
+    <input matInput placeholder="Ex. Descreva Algo" formControlName="observation" (click)="validatePhone()">
+  </mat-form-field>
+
+  <mat-accordion *ngIf="id == null">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Endereço
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <!-- CEP -->
+      <mat-form-field class="input-cep">
+        <mat-label>CEP</mat-label>
+        <input matInput placeholder="Ex. 99.000-000" mask="00.000-000" formControlName="cep">
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="btn-cep" (click)="buscarCep()" ><mat-icon aria-hidden="false" aria-label="Criar">search</mat-icon></button>
+
+      <!-- Logradouro -->
+      <mat-form-field class="input-width">
+        <mat-label>Logradouro</mat-label>
+        <input matInput placeholder="Ex. Rua Exemplo" formControlName="logradouro">
+      </mat-form-field>
+
+      <!-- Localidade -->
+      <mat-form-field class="input-width">
+        <mat-label>Bairro</mat-label>
+        <input matInput placeholder="Ex. Bairro Angular" formControlName="bairro">
+      </mat-form-field>
+
+      <!-- Cidade -->
+      <mat-form-field class="input-width">
+        <mat-label>Estado</mat-label>
+        <input matInput placeholder="Ex. Firebase" formControlName="estado">
+      </mat-form-field>
+
+      <!-- UF -->
+      <mat-form-field class="input-width">
+        <mat-label>Estado</mat-label>
+        <input matInput placeholder="Ex. MG" formControlName="cidade">
+      </mat-form-field>
+
+      <!-- Número Local -->
+      <mat-form-field class="input-width">
+        <mat-label>Número</mat-label>
+        <input matInput placeholder="Ex. 584" formControlName="numeroLocal">
+      </mat-form-field>
+
+
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="fechar()">Fechar</button>
+    <button mat-flat-button color="primary" (click)="createUpdate()" class="btn-save">Enviar</button>
+  </div>
+</form>
+
